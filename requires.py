@@ -52,3 +52,7 @@ class MongoDBClient(RelationBase):
             if all(data.values()):
                 connection_strings.append(str.format('{hostname}:{port}', **data))
         return connection_strings
+
+    def versions(self):
+        return [conv.get_remote('version', default=None)
+                for conv in self.conversations()]
